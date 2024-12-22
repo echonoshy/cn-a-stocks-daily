@@ -1,7 +1,7 @@
 name: Fetch market daily
 on:
   schedule:
-    - cron: '30 8 * * *' # 中国1日的16:30，就是UTC时间1日的08:30
+    - cron: '22 11 * * *' # UTC时间的08:30，对应中国的16:30
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -31,5 +31,5 @@ jobs:
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+        github_token: ${{ secrets.ACTION_TOKENS }}
         branch: ${{ github.ref }}
