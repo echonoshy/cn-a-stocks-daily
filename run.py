@@ -30,11 +30,13 @@ def handle_market_daily(df: pd.DataFrame) -> None:
         return
 
     today = str(datetime.now())[:10]
+    year = today[:4]
     obj = json.loads(df.to_json(orient='records'))
     output = json.dumps(obj, indent=4, ensure_ascii=False)
     
-    os.makedirs(DATA_DIR['market'], exist_ok=True)
-    output_path = os.path.join(DATA_DIR['market'], f'{today}.json')
+    year_dir = os.path.join(DATA_DIR['market'], year)
+    os.makedirs(year_dir, exist_ok=True)
+    output_path = os.path.join(year_dir, f'{today}.json')
     with open(output_path, 'w') as fp:
         fp.write(output)
 
